@@ -11,16 +11,16 @@ import GoogleLoginComponent from "../components/GoogleLoginComponent";
 
 const SignUp = (props) => {
   const onLoginHandlerVendor = (login, profile) => {
-    if (!login) return window.alert("Couldn't able to sign in.");
+    if (!login) return window.alert("Failed to sign in.");
     else {
-      window.location.href = "http://localhost:3000/vendor"
+      window.location.href = "http://localhost:3000/vendorinput"
       localStorage.setItem('vendorProfile', JSON.stringify(profile));
     }
   };
   const onLoginHandlerUser = (login, profile) => {
-    if (!login) return window.alert("Couldn't able to sign in.");
+    if (!login) return window.alert("Failed to sign in.");
     else {
-      window.location.href = "http://localhost:3000/user"
+      window.location.href = "http://localhost:3000/userinput"
       localStorage.setItem('userProfile', JSON.stringify(profile));
     }
   };

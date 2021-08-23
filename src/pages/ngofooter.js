@@ -8,9 +8,9 @@ const NgoFooter = () => {
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="6">
-            <h5 className="title">Ngo Name</h5>
+            <h5 className="title">Vendor Name</h5>
             <p>
-              Ngo Address: 191/3, Grand Truck Road, Mississauga, France - 110034
+              Vendor Address: 191/3, Grand Truck Road, Mississauga, France - 110034
             </p>
           </MDBCol>
           <MDBCol md="6">
@@ -31,7 +31,7 @@ const NgoFooter = () => {
       </MDBContainer>
       <div className="footer-copyright text-center py-3">
         <MDBContainer fluid>
-          &copy; {new Date().getFullYear()} Copyright: <a href=""> Archie </a>
+          &copy; {new Date().getFullYear()} Copyright: <a href=""> SolFlow </a>
         </MDBContainer>
       </div>
     </MDBFooter>
