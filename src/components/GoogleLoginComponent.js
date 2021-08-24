@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
 import GoogleLogin from 'react-google-login'
+import Constants from '../Constant/Constants';
 
 function GoogleLoginComponent(props) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [profile, setProfileInfo] = useState({});
+    let isLoggedIn = false;
+    let profile = {};
 
     const responseSuccessGoogle = response => {
-        setIsLoggedIn(true);
-        setProfileInfo(response.profileObj);
+        isLoggedIn = true;
+        profile = response.profileObj
         return (props.loggingIn(isLoggedIn, profile));
     }
     const responseFailureGoogle = response => {
-        setIsLoggedIn('false');
-        setProfileInfo({"error":"Error logging in"});
-        props.loggingIn(isLoggedIn, profile);
-        console.log(response)
+        isLoggedIn = false;
+        profile = {"error":"Error logging in"};
+        return props.loggingIn(isLoggedIn, profile);
     }
     return (
         <GoogleLogin 
-        clientId="797666968198-2049tv64tdkfebjuuilhbmku2fd0qk23.apps.googleusercontent.com"
-        buttonText="Login"
+        clientId = {Constants.clientId}
+        buttonText="Continue with Google"
         onSuccess={responseSuccessGoogle}
         onFailure={responseFailureGoogle}
         cookiePolicy={'single_host_origin'}
