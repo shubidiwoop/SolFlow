@@ -7,10 +7,26 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 
-const Products = () => {
-
+const Services = () => {
+    function readCookie(name) {
+        let key = name + "=";
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1, cookie.length);
+                console.log(cookie);
+            }
+            if (cookie.indexOf(key) === 0) {
+                console.log(cookie.substring(key.length, cookie.length));
+                return cookie.substring(key.length, cookie.length);
+            }
+        }
+        return null;
+    }
  const [editPro,setEditPro] = useState({
      edit:[
         {
@@ -38,22 +54,39 @@ const Products = () => {
           });
           setShow(false);
     }
-
+    const paymentHistory = (event) => {
+        // need to work on function
+        event.preventDefault();
+        // const amount = event.target.addmoney.value;
+        const emaila = readCookie("email");
+        axios.post('https://ngo-server.herokuapp.com/erc20/balanceof', {
+            "emailAddress": String(emaila)
+        })
+            .then(function (response) {
+                console.log("minted", response);
+                window.alert("Your balance is " + response.data.data[0].uint256);
+            })
+            .catch(function (error) {
+                console.log("ERRROR STARTS HERE::\n", error.response.data);
+                console.log("\nERROR ENDS HERE");
+                alert("error in adding money");
+            })
+    }
     
     return (
         <Fragment>
 
         <CardColumns className="design">
-            <Card>
+                <Card>
+                    <div><Button variant="info" onClick={paymentHistory}>Payment History</Button></div>
+                    <br />
                 <Card.Img variant="top" src="https://source.unsplash.com/800x800/?books" />
                 <Card.Body>
                     <Card.Title>Product 1</Card.Title>
                     <Card.Text>
-                        cost: {`$${editPro.edit[0].cost}`} 
+                        Cost of good: {`$${editPro.edit[0].cost}`} 
                         <br/>
-                        Quantity needed: {editPro.edit[0].Quantity}
-                        <br/>
-                        Total goal: {`$${editPro.edit[0].cost*editPro.edit[0].Quantity}`}
+ 
                     </Card.Text>
                     <Button variant="secondary" onClick={handleShow}>Edit Product</Button>
                 </Card.Body>
@@ -131,4 +164,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default Services;

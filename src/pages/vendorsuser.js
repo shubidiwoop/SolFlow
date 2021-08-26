@@ -10,7 +10,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 
 let goal = [0];
-const ProductsDonor = () => {
+const VendorsUser = () => {
     const [payD, setPayD] = useState(
         {
             "bar": 0
@@ -115,6 +115,24 @@ const ProductsDonor = () => {
                 alert("error in adding money");
             })
     }
+    const paymentHistory = (event) => {
+        // need to work on function
+        event.preventDefault();
+        // const amount = event.target.addmoney.value;
+        const emaila = readCookie("email");
+        axios.post('https://ngo-server.herokuapp.com/erc20/balanceof', {
+            "emailAddress": String(emaila)
+        })
+            .then(function (response) {
+                console.log("minted", response);
+                window.alert("Your balance is " + response.data.data[0].uint256);
+            })
+            .catch(function (error) {
+                console.log("ERRROR STARTS HERE::\n", error.response.data);
+                console.log("\nERROR ENDS HERE");
+                alert("error in adding money");
+            })
+    }
     function readCookie(name) {
         let key = name + "=";
         let cookies = document.cookie.split(';');
@@ -137,50 +155,64 @@ const ProductsDonor = () => {
             <Card>
             <div><Button variant="info" onClick={handleShow1}>Add money To the wallet</Button></div>
             <br />
-                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?books" />
+                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?electricity" />
                 <Card.Body>
-                    <Card.Title>Product 1</Card.Title>
+                    <Card.Title>Kabootar Electric Company</Card.Title>
                     <Card.Text>
-                        <p>Price: $2</p>
-                        <p> Quantity needed: 100</p>
-                        Total goal: $200
+                        <p><i>Electricity</i></p>
+                        <p> Coin: solana</p>
+                        <p> Frequency: monthly</p>
+                        <p> Total amount to pay: $400</p>
                     </Card.Text>
-                    <Button variant="success" onClick={handleShow}>Donate</Button>
+                    <div class="flex-box-2">
+                    <Button variant="primary" onClick={handleShow}>Edit</Button>
+                        <Button variant="danger" onClick={handleShow}>Unsubscribe</Button>
+                        </div>
                 </Card.Body>
                 <Card.Footer>
-                    <ProgressBar now={payD.bar} label={`${payD.bar}%`} />
+
                 </Card.Footer>
             </Card>
             <Card>
             <div><Button variant="info" onClick={showBalance}>Show balance</Button></div>
             <br />
-                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?shelter" />
+                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?gas" />
                 <Card.Body>
-                    <Card.Title>Product 2</Card.Title>
+                    <Card.Title>Tel Baba Private Limited</Card.Title>
                     <Card.Text>
-                        <p>Price: $5</p>
-                        <p>Quantity needed: 50</p>
-                        Total goal: $250
+                        <p><i>Gas</i></p>
+                        <p> Coin: solana</p>
+                        <p> Frequency: weekly</p>
+                        <p> Total amount to pay: $600</p>
                     </Card.Text>
-                    <Button variant="success" onClick={handleShow}>Donate</Button>
+                    <div class="flex-box-2">
+                        <Button variant="primary" onClick={handleShow}>Edit</Button>
+                        <Button variant="danger" onClick={handleShow}>Unsubscribe</Button>
+                    </div>
                 </Card.Body>
                 <Card.Footer>
-                    <ProgressBar now={now2} label={`${now2}%`} />
+
                 </Card.Footer>
             </Card>
             <Card>
-                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?clothes" />
+                <div><Button variant="info" onClick={paymentHistory}>Display Payment History</Button></div>
+            <br />
+                <Card.Img variant="top" src="https://source.unsplash.com/800x800/?newspaper" />
                 <Card.Body>
-                    <Card.Title>Product 3</Card.Title>
+                    <Card.Title>Jhadu Pocha Wealth magazine</Card.Title>
                     <Card.Text>
-                        <p>Price: $10 </p>
-                        <p>Quantity needed: 60</p>
-                        Total goal: $600
+                        <p><i>Newspaper</i></p>
+                        <p> Coin: solana</p>
+                        <p> Frequency: daily</p>
+                        <p> Total amount to pay: $200</p>
                     </Card.Text>
-                    <Button variant="success" onClick={handleShow}>Donate</Button>
+                    <div class="flex-box-2">
+                        <Button variant="primary" onClick={handleShow}>Edit</Button>
+                        <Button variant="danger" onClick={handleShow}>Unsubscribe</Button>
+                    </div>
                 </Card.Body>
                 <Card.Footer>
-                    <ProgressBar now={now3+20} label={`${now3+20}%`} />
+                    <Button variant="secondary" onClick={handleShow}>View more vendors</Button>
                 </Card.Footer>
             </Card>
             <Modal show={show} onHide={handleClose}>
@@ -220,7 +252,7 @@ const ProductsDonor = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose1}>
+                    <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
                 </Modal.Footer>
@@ -228,4 +260,4 @@ const ProductsDonor = () => {
         </CardColumns>
     )
 }
-export default ProductsDonor;
+export default VendorsUser;

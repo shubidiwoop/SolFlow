@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import NavigationBar from "./navbarIL";
 import FooterPage from "./footer";
-import NgoFooter from "./ngofooter";
-import Products from "./products";
+import VendorFooter from "./vendorfooter";
+import Services from "./services";
 import Card from "react-bootstrap/Card";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -35,13 +35,13 @@ const Vendor = () => {
               <label for="service">Service:</label>
               <DropdownButton
                 alignRight
-                title="Dropdown right"
+                title="Select one:"
                 id="dropdown-menu-align-right"
                 onSelect={handleSelect}
               >
                 <Dropdown.Item eventKey="electricity">Electricity</Dropdown.Item>
                 <Dropdown.Item eventKey="news">News</Dropdown.Item>
-                <Dropdown.Item eventKey="audi">Audi</Dropdown.Item>
+                <Dropdown.Item eventKey="gas">Gas</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item eventKey="others">Others</Dropdown.Item>
               </DropdownButton>

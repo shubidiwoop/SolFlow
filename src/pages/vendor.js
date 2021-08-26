@@ -1,19 +1,19 @@
 import React from 'react';
 import NavigationBar from './navbarIL';
 import FooterPage from './footer';
-import NgoFooter from './ngofooter';
-import Products from './products';
+import VendorFooter from './vendorfooter';
+import Services from './services';
 
 
-const Ngo = () => {
+const Vendor = () => {
     return(
         <div>
             <NavigationBar  />
-            <Products />
-            <NgoFooter />
+            <Services />
+            <VendorFooter />
         </div>
     );
 
 }
 
-export default Ngo;
+export default Vendor;

@@ -2,7 +2,7 @@ import React from "react";
 import '../cssSyling/Home.css';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
-const NgoFooter = () => {
+const VendorFooter = () => {
   return (
     <MDBFooter className="font-small pt-4 mt-4 footerD">
       <MDBContainer fluid className="text-center text-md-left">
@@ -38,4 +38,4 @@ const NgoFooter = () => {
   );
 }
 
-export default NgoFooter;
+export default VendorFooter;

@@ -25,3 +25,8 @@
     line-height: 75px;
     font-size: 30px;
   }
+
+.flex-box-2 {
+    display: flex;
+    justify-content: space-between;
+}
