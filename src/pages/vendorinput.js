@@ -1,45 +1,76 @@
-import React from 'react';
-import NavigationBar from './navbarIL';
-import FooterPage from './footer';
-import NgoFooter from './ngofooter';
-import Products from './products';
+import React, { useState } from "react";
+import NavigationBar from "./navbarIL";
+import FooterPage from "./footer";
+import NgoFooter from "./ngofooter";
+import Products from "./products";
 import Card from "react-bootstrap/Card";
-
-
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const Vendor = () => {
-    return (
-        <div>
-            <NavigationBar />
+  const [service, setService] = useState("");
+  const [nameofOrganisation, setNameOfOrganisation] = useState("");
+  const [gstIn, setGstIn] = useState("");
 
-            <div className="flex-container designTop">
-                <div className="box">
-                    <Card>
-                        <form>
-                            <label for="service">Service:</label>
-                            <select id="service" name="service">
-                                <option value="electricity">Electricity</option>
-                                <option value="gas">Gas</option>
-                                <option value="newspaper">Newspaper</option>
-                                <option value="audi">Audi</option>
-                            </select>
+  const onSubmitHandler = () => {
+    const vendorData = {
+      service,
+      gstIn,
+      nameofOrganisation,
+    };
+    console.log(vendorData);
+  };
+  
+  const handleSelect = (event) => {
+    setService(event);
+  }
+  return (
+    <div>
+      <NavigationBar />
 
-                            <p>Name of organisation</p>
-                            <input type="text" name="name" />
+      <div className="flex-container designTop">
+        <div className="box">
+          <Card>
+            <form onSubmit={onSubmitHandler}>
+              <label for="service">Service:</label>
+              <DropdownButton
+                alignRight
+                title="Dropdown right"
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="electricity">Electricity</Dropdown.Item>
+                <Dropdown.Item eventKey="news">News</Dropdown.Item>
+                <Dropdown.Item eventKey="audi">Audi</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="others">Others</Dropdown.Item>
+              </DropdownButton>
 
-                            <p>GSTIN Number</p>
-                            <input type="text" name="gstin" /> 
+              <p>Name of organisation</p>
+              <input
+                type="text"
+                name="name"
+                onChange={(event) => setNameOfOrganisation(event.target.value)}
+              />
 
-                            <p><input type="submit" value="Submit" /></p>
-                        </form>
-                    </Card>
-                </div>
-            </div>
+              <p>GSTIN Number</p>
+              <input
+                type="text"
+                name="gstin"
+                onChange={(event) => setGstIn(event.target.value)}
+              />
 
-            <FooterPage />
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </form>
+          </Card>
         </div>
-    );
+      </div>
 
-}
+      <FooterPage />
+    </div>
+  );
+};
 
 export default Vendor;
